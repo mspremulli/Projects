@@ -1,0 +1,90 @@
+body{
+    background-color: lightblue;
+}
+
+#titleContainer{
+    text-align: center;
+}
+
+
+/* class for each movie box */
+.singleMovie{
+    border:dotted;
+    border-radius: 5%;
+    display: grid;
+    grid-template-rows: 20px;
+    grid-gap: 10px;
+    /* align-items: center; */
+}
+
+.singleMovie>img{
+    background-position-x: center;
+    
+}
+/* movie titles */
+.singleMovie>h2{
+    text-align: center;
+}
+/* movie release date */
+.singleMovie>h4{
+    text-align: center;
+}
+/* movie imbd link */
+.singleMovie>link{
+    text-align: center;
+}
+
+.movieImgDiv>h5{
+    opacity: 0%;
+    position: relative;
+    top:-200px;
+    background-color: black;
+    color:white;
+    
+}
+
+.movieImgDiv:hover>h5{
+    opacity: 100%;
+}
+
+
+/* class for rented and availible */
+.movieList{
+    display: flex;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 250px 250px 250px 250px;
+    grid-gap: 30px;
+    margin-top: 10px;
+    border: solid;
+    border-radius: 1%;
+}
+/* holds everything but titlebar */
+#mainContainer{
+    display: flex;
+}
+
+#titleContainer{
+    background-color: lightblue;
+}
+
+#sideBar>h2{
+    background-color: pink; 
+   
+    /* padding: 10px;
+    text-align: center;
+    display: flex; */
+}
+#sideBar{
+    border:solid;
+    display:grid;
+    height: 150px;
+    
+
+}
+
+#movieContainer{
+    text-align: center;
+    font-weight: bolder;
+    font-size: larger;
+}
