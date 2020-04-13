@@ -10,8 +10,9 @@ const monthLast = [0,31,28,31,30,31,30,31,31,30,31,30,31];
 
 function selectY(){
     DateObj.year = selectYear.value;
-    dateDisplay();
     checkDay();
+    updateSelect();
+    
 }
 
 function selectM(){
@@ -41,44 +42,49 @@ function selectM(){
         default: DateObj.month = 12
     };
     checkDay();
-    dateDisplay();
+    updateSelect();
 }
 
-
+//checks if the date is impossible
 function checkDay(){
+    //checks leap year
+    let y = DateObj.year;
+    monthLast[2] = (DateObj.month == 2 && ((y % 4 == 0 && y % 100 !=0) || y % 400 == 0)) ? 29: 28;
+
     if (DateObj.day > monthLast[DateObj.month]){
         DateObj.day = monthLast[DateObj.month];
         selectDay.value = monthLast[DateObj.month];
     }
+    
+   
 }
 
 function selectD(){
     DateObj.day = selectDay.value;
     checkDay();
-    dateDisplay();
+    updateSelect();
 }
 
-function dateDisplay(){
-    document.getElementById('dateDiv').innerHTML='';
-    document.getElementById('dateDiv').appendChild(Html.createHeading({text: `${DateObj.year}/${DateObj.month}/${DateObj.day}`, size:1}));
-     
-}
-
-function setUp(){
+function updateSelect(){
+    let years = [],
+        days=[];
     let mainDiv = Html.createDivElement({id: 'mainDiv'});
     let dateDiv = Html.createDivElement({id: 'dateDiv'});
+    document.body.appendChild(dateDiv);    
+    document.body.appendChild(mainDiv);
+    document.getElementById('mainDiv').innerHTML='';
+    document.getElementById('dateDiv').innerHTML='';
     
-    let years = [],
-        month = 1,
-        days=[],
-        months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-        lastDay=31;
+   
+    //set the years, months, and days
+    let months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     for(let i=2020;i >= 1920 ;i--){
         years.push(i);
     }
-    for(let i=0;i <= lastDay ;i++){
+    for(let i=0;i <= monthLast[DateObj.month] ;i++){
         days.push(i);
     }
+
     let selectYear = Html.createSelectElement({array: years, id:'selectYear', defaultText:'Select a Year'});
     selectYear.onchange = selectY;
     let selectMonth = Html.createSelectElement({array: months, id:'selectMonth', defaultText:'Select a Month'});
@@ -86,16 +92,14 @@ function setUp(){
     let selectDay = Html.createSelectElement({array: days, id:'selectDay', defaultText:'Select a Day'});
     selectDay.onchange = selectD;
 
-
-    document.body.appendChild(dateDiv);    
-    document.body.appendChild(mainDiv);
-    dateDisplay()
+    
+    document.getElementById('dateDiv').appendChild(Html.createHeading({text: `${DateObj.year}/${DateObj.month}/${DateObj.day}`, size:1}));
     document.getElementById('mainDiv').appendChild(selectYear);
     document.getElementById('mainDiv').appendChild(selectMonth);
     document.getElementById('mainDiv').appendChild(selectDay);
 
-    
-    
 }
 
-setUp();
+
+
+updateSelect();
