@@ -73,24 +73,111 @@ let Html = {
 },
 
 //select elements
- createSelectElement(selectObj) {
+//  createSelectElement(selectObj) {
+//     let select = document.createElement('select');
+//     select.id = selectObj.id;
+//     select.className = selectObj.className;
+//     let defaultOption = document.createElement('option');
+//     defaultOption.innerText = selectObj.default != undefined ? selectObj.default: selectObj.defaultText;
+
+//     select.appendChild(defaultOption);
+
+//     for(let i = 0; i < selectObj.array.length; i++){
+//         let option = document.createElement('option');
+//         option.innerText = selectObj.array[i];
+//         option.value = selectObj.array[i];
+//         select.appendChild(option);
+//     };
+
+//     return select;
+// }
+
+
+
+ createSelectElement(selectObject) {
+    
+
     let select = document.createElement('select');
-    select.id = selectObj.id;
-    select.className = selectObj.className;
-    let defaultOption = document.createElement('option');
-    defaultOption.innerText = selectObj.default != undefined ? selectObj.default: "Select option";
 
-    select.appendChild(defaultOption);
+    //id
 
-    for(let i = 0; i < selectObj.array.length; i++){
+    if (selectObject.id != undefined && document.getElementById(selectObject.id) == null) {
+        select.id = selectObject.id;
+    }
+    //className
+
+    if (selectObject.class != undefined ) {
+        select.className = selectObject.class;
+    }
+
+    let defaultOpt = document.createElement('option');
+
+    defaultOpt.innerText = selectObject.defaultText == undefined ? 'Select An Option' : selectObject.defaultText;
+
+    defaultOpt.value = '';
+
+    select.appendChild(defaultOpt);
+    //create default option *
+    //set properties of default option *
+    //append it to parent
+
+    for (let i = 0; i < selectObject.array.length; i++) {
+
         let option = document.createElement('option');
-        option.innerText = selectObj.array[i];
-        option.value = selectObj.array[i];
-        select.appendChild(option);
-    };
 
-    return select;
+        option.innerText = selectObject.array[i];
+
+        option.value = selectObject.array[i];
+
+        select.appendChild(option);
+    }
+
+    // select.onchange = selectObject.change;
+
+    //optionally add a onchange property (link rent/return methods)
+
+    return select
+    //return
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

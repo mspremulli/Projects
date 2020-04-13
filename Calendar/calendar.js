@@ -104,7 +104,6 @@ function previousDay(Dte){
             DateObj.day = 29;
         }
         
-        
     }
      refresh();
 }
