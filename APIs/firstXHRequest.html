@@ -1,0 +1,55 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMLHR first try</title>
+</head>
+<body>
+    <div id ='names'>
+        <script>
+            let xhr = new XMLHttpRequest();
+            xhr.onabort = err => {
+                console.log('The request has been aborted', err, err.message);
+
+            }
+            //'https://jsonplaceholder.typicode.com/users'
+            let apiURL = 'https://api.github.com/users',
+                reqMethod ='GET',
+                asyncBool = true;
+            xhr.open(reqMethod, apiURL, asyncBool);
+
+            xhr.onload = () => {
+                let rawResponseData = xhr.responseText;
+                let parsedData = JSON.parse(rawResponseData);
+                console.log(parsedData)
+
+                let mainDiv = document.createElement('div')
+                mainDiv.id = 'mainDiv'
+                document.body.appendChild(mainDiv);
+
+                parsedData.forEach(element => {
+                    let user = document.createElement('ul');
+                    user.id = 'user';
+                    document.getElementById('mainDiv').appendChild(user);
+                    let login = document.createElement('li');
+                    login.innerText = element.login;
+                    document.getElementById('user').appendChild(login);
+                    let url = document.createElement('li');
+                    url.innerText = element.url;
+                    document.getElementById('user').appendChild(login);
+                    let avatar = document.createElement('li');
+                    avatar.innerText = element.avatar_url;
+                    document.getElementById('user').appendChild(avatar);
+                });
+               
+
+            }
+
+            xhr.send();
+
+            
+
+        </script>   
+    </div>
+</body>
+</html>

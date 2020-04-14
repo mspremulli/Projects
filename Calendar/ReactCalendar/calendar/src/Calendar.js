@@ -11,9 +11,9 @@ class Calendar extends Component {
   
   nextDay = () =>{
     console.log(this.state.dateInfo)
-    this.setState({
-    dateInfo.day: this.state.dateInfo.day+1
-    })
+
+    this.dateInfo.day = this.state.dateInfo.day+1
+    
   }
 
   render(){
