@@ -51,7 +51,7 @@ let Html = {
 
  createLinkElement (linkObj) {
     let a = document.createElement('a');
-    let link = document.createTextNode(`${linkObj.text}'s IMBD Link`);
+    let link = document.createTextNode(`${linkObj.text}'s Link`);
     if(linkObj.newTab){
      a.target = '_blank';
     }
@@ -71,6 +71,26 @@ let Html = {
     btn.onclick = btnObj.click;
     return btn;
 },
+
+//select elements
+//  createSelectElement(selectObj) {
+//     let select = document.createElement('select');
+//     select.id = selectObj.id;
+//     select.className = selectObj.className;
+//     let defaultOption = document.createElement('option');
+//     defaultOption.innerText = selectObj.default != undefined ? selectObj.default: selectObj.defaultText;
+
+//     select.appendChild(defaultOption);
+
+//     for(let i = 0; i < selectObj.array.length; i++){
+//         let option = document.createElement('option');
+//         option.innerText = selectObj.array[i];
+//         option.value = selectObj.array[i];
+//         select.appendChild(option);
+//     };
+
+//     return select;
+// }
 
 
 
