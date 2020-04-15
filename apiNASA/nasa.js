@@ -170,22 +170,22 @@ function openAPI(){
 
     let nasaDate=`${DateObj.year}-${DateObj.month}-${DateObj.day}`
     console.log(nasaDate)
-    // xhr.open('GET', `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${nasaDate}`);
+    xhr.open('GET', `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${nasaDate}`);
     
-    // xhr.onload = () => {
-    //     let data = JSON.parse(xhr.responseText);
+    xhr.onload = () => {
+        let data = JSON.parse(xhr.responseText);
         
-  
+        
+        
       
        
-    //     let dataDiv = Html.createImageElement({src:data.url});
-    let dataDiv =  Html.createImageElement({src:'https://apod.nasa.gov/apod/image/0105/shepard_freedom7.jpg', height:500, width:800});
+        let dataDiv = Html.createImageElement({src:data.url, height:500, width:800});
     document.getElementById('photoDiv').appendChild(dataDiv);
-    // }
+    }
     
 
     
-    // xhr.send();
+    xhr.send();
 
     
 }
