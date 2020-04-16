@@ -95,17 +95,16 @@ class Calendar extends Component {
       }
     });
 
-
-
     return (
-     <div>
-        <h1>{this.state.month}-{this.state.day}-{this.state.year}</h1>
+     <div className ='container'>
+        <h2 className ='center blue lighten-4'>NASA Image of the Day Calendar</h2>
+        <h3 className ='center'>{this.state.month}-{this.state.day}-{this.state.year}</h3>
         <br/>
-        <div >
+        <div className='center'>
           <Select  onChange={this.handleYear} options = {yearList} />
           <Select  onChange={this.handleMonth} options = {monthList} />
           <Select  onChange={this.handleDay} options = {dayList} />
-          <button onClick={this.showPicture}>Show Picture</button>
+          <button className='btn-large orange darken-4 pulse'onClick={this.showPicture}>Show Picture</button>
           <br/>
           <img alt='No image loaded yet' src={this.state.parsedData} />
         </div>
