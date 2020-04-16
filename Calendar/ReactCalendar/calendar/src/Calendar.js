@@ -1,71 +1,60 @@
 import React, {Component} from 'react';
-import Select, {components} from 'react-select'
+import Select from 'react-select'
 class Calendar extends Component {
   state = {
-      day: 1,
-      month: 1,
-      year: 2000,
+      day: '01',
+      month: '01',
+      year: '2000',
       parsedData:''
   }
 
 
-
-// componentDidUpdate() {
-//   // let xhr = new XMLHttpRequest();
-//   //add leading zeros to day and month
-//   if(Number.isInteger(this.state.month) && this.state.month < 10){
-//     this.setState({
-//       month: `0${this.state.month}`
-//     })
-//   }
-//   // if(this.state.day < 10){
-//     this.setState({
-//       // day: `0${this.state.day}`
-//       day: '02'
-//     })  
-//   // }
-
-//   //set the date in format nasa API requires YYYY-MM-DD
-//   let nasaDate=`${this.state.year}-${this.state.month}-${this.state.day}`
-
-//   console.log(nasaDate)
-//   // xhr.open('GET', `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${nasaDate}`);
-
-//   // xhr.onload = () => {
-//   //     this.setState({
-//   //       parsedData:JSON.parse(xhr.responseText)
-//   //     })
-//   //     console.log(this.state.parsedData.url);
-//   // }
-  
-//   // xhr.send();
-  
-// }
-
-
-  dayList = [{label:1},
-    {label:2},
-    {label:3} ];
+  dayList = [{label:'01'},
+    {label:'02'},
+    {label:'03'} ];
 
   monthList = [
-    {label: 'January'},
-    {label: 'Februay'},
-    {label:'March'},
-    {label:'April'},
-    {label:'May'},
-    {label:'June'},
-    {label:'July'},
-    {label:'August'},
-    {label:'September'},
-    {label:'October'},
-    {label:'November'},
-    {label:'December'},
+    {label: 'January', value:'01'},
+    {label: 'Februay', value:'02'},
+    {label:'March', value:'03'},
+    {label:'April', value:'04'},
+    {label:'May', value:'05'},
+    {label:'June', value:'06'},
+    {label:'July', value:'07'},
+    {label:'August', value:'08'},
+    {label:'September', value:'09'},
+    {label:'October', value:'10'},
+    {label:'November', value:'11'},
+    {label:'December', value:'12'},
   ];
   
   yearList = [{label: 2020},
     {label: 2019},
     {label: 2018}
   ];
+
+
+
+  showPicture = () => {
+   let xhr = new XMLHttpRequest();
+  //add leading zeros to day and month
+  
+
+  //set the date in format nasa API requires YYYY-MM-DD
+  let nasaDate=`${this.state.year}-${this.state.month}-${this.state.day}`
+
+  // console.log(nasaDate)
+  xhr.open('GET', `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date=${nasaDate}`);
+
+  xhr.onload = () => {
+      this.setState({
+        parsedData:JSON.parse(xhr.responseText).url
+      })
+  }
+  
+  xhr.send();
+  
+  }
 
   handleYear = (selected) => {
     this.setState({
@@ -74,22 +63,17 @@ class Calendar extends Component {
   }
   handleMonth = (selected) => {
     this.setState({
-      month:selected.label
+      month:selected.value
     })  
   }
   handleDay = (selected) => {
     this.setState({
       day:selected.label
     })
+    
   }
    
   
-  
- showPicture = () => {
-   console.log(this.state.day)
-   console.log(this.state.month)
-   console.log(this.state.year)
- }
 
   render(){
     return (
@@ -97,10 +81,12 @@ class Calendar extends Component {
         <h1>{this.state.month}-{this.state.day}-{this.state.year}</h1>
         <br/>
         <div >
-          <Select  onChange={this.handleChange} options = {this.yearList} />
-          <Select  onChange={this.handleChange} options = {this.monthList} />
-          <Select  onChange={this.handleChange} options = {this.dayList} />
-          <button onSubmit={showPicture}>Show Picture</button>
+          <Select  onChange={this.handleYear} options = {this.yearList} />
+          <Select  onChange={this.handleMonth} options = {this.monthList} />
+          <Select  onChange={this.handleDay} options = {this.dayList} />
+          <button onClick={this.showPicture}>Show Picture</button>
+          <br/>
+          <img src={this.state.parsedData} />
         </div>
       </div> 
     );
